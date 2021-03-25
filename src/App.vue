@@ -1,20 +1,24 @@
 <template>
   <div id="app">
     <router-view/>
+    <main-tab/>
   </div>
 </template>
 
 <script>
+import MainTab from "@/components/content/MainTab";
 export default {
   name: 'App',
-
+  components: {
+    MainTab
+  }
 }
 </script>
 
 <style>
   @import "~@/assets/css/base.css";
   body {
-    background: url("~@/assets/img/bg.jpg");
+    background: #0b2845;
     background-size: cover;
     overflow: hidden;
   }
