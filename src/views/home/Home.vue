@@ -2,7 +2,7 @@
   <div id="home">
     <div>
       <ul>
-        <li v-for="(item, index) in games.length" :class="{'active': index === currentIndex}">Games{{item}}</li>
+        <li v-for="(item, index) in games.length" :class="{'active': index === currentIndex}" :key="index">Games{{item}}</li>
       </ul>
     </div>
     <border-click class="borderClick" :message="message" @click.native="move"/>
@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       message: 'Game Start',
-      enter: false,
+      clickCount: 0,
       games: [1, 2, 3, 4],
       number: 0,  //随机产生的数字
       currentIndex: -1, //当前转到哪个位置
@@ -32,11 +32,27 @@ export default {
   methods: {
     //开始转动
     move() {
+      if(this.message === 'Game Start') {  //这里点击一次之后会调用多次
       this.times += 1   //转动次数
       this.oneRoll()  //转动过程调用的每一次转动方法
       this.useNumber()
-      this.enter = true
-    },
+      } else {   //转完之后再次点击可以进入详细游戏界面
+        switch (this.currentIndex) {
+            case 0:
+              this.$router.push('/game1')
+              break
+            case 1:
+              this.$router.push('/game2')
+              break
+            case 2:
+              this.$router.push('/game3')
+              break
+            case 3:
+              this.$router.push('/game4')
+              break
+          }
+      }
+  },
 
     //每一次转动
     oneRoll() {
@@ -53,26 +69,13 @@ export default {
     useNumber() {
       //如果当前转动次数达到要求 && 目前转到的位置是中奖位置
       if (this.times > this.cycle +10 && this.number === this.currentIndex) {
-        clearTimeout(this.timer)  //清楚转动定时器
+        clearTimeout(this.timer)  //清除转动定时器
         this.times = 0   //转动跑格子次数初始化为0，可以进行下一次抽奖
 
         this.message = 'Go!!!'
-        if (this.message === 'Go!!!' && this.enter) {//跳转到游戏页面
-          switch (this.currentIndex) {
-            case 0:
-              this.$router.push('/game1')
-              break
-            case 1:
-              this.$router.push('/game2')
-              break
-            case 2:
-              this.$router.push('/game3')
-              break
-            case 3:
-              this.$router.push('/game4')
-              break
-          }
-        }
+        // if (this.message === 'Go!!!') {//在第二次点击时，跳转到游戏页面
+          
+        // }
       } else {
         if (this.times < this.cycle -20) {
           this.speed -= 4  //加快转动速度
@@ -81,7 +84,7 @@ export default {
         }
         this.timer = setTimeout(this.move, this.speed)  //开始转动
       }
-    }
+    },
   }
 }
 </script>
