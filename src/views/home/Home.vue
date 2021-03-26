@@ -5,7 +5,7 @@
         <li v-for="(item, index) in games.length" :class="{'active': index === currentIndex}" :key="index">Games{{item}}</li>
       </ul>
     </div>
-    <border-click class="borderClick" :message="message" @click.native="move"/>
+    <border-click class="borderClick" :message="message" @click.native="move" :style="{pointerEvents: isClick}"/>
   </div>
 </template>
 
@@ -19,8 +19,10 @@ export default {
   data() {
     return {
       message: 'Game Start',
-      clickCount: 0,
       games: [1, 2, 3, 4],
+      isClick: 'auto',
+      
+      //转动需要的变量
       number: 0,  //随机产生的数字
       currentIndex: -1, //当前转到哪个位置
       cycle: 20, // 转动基本次数：即至少需要转动多少次再进入抽奖环节
@@ -33,6 +35,7 @@ export default {
     //开始转动
     move() {
       if(this.message === 'Game Start') {  //这里点击一次之后会调用多次
+      this.isClick = 'none'
       this.times += 1   //转动次数
       this.oneRoll()  //转动过程调用的每一次转动方法
       this.useNumber()
@@ -73,9 +76,7 @@ export default {
         this.times = 0   //转动跑格子次数初始化为0，可以进行下一次抽奖
 
         this.message = 'Go!!!'
-        // if (this.message === 'Go!!!') {//在第二次点击时，跳转到游戏页面
-          
-        // }
+        this.isClick = 'auto'   //让盒子能够点击
       } else {
         if (this.times < this.cycle -20) {
           this.speed -= 4  //加快转动速度
