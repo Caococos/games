@@ -75,3 +75,8 @@ input {
   font-size: .16rem;
   outline: none;
 }
+
+/*清除button点击之后的白边框*/
+button:focus {
+  outline: 0;
+}

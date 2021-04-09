@@ -1,9 +1,9 @@
 <template>
   <div class="main-tab">
     <button class="btn one" @click="goToHome">Home</button>
-    <button  class="btn two" @click="goToG1">Game1</button>
-    <button  class="btn three" @click="goToG2">Game2</button>
-    <button  class="btn four" @click="goToG3">Game3</button>
+    <button  class="btn two" @click="goToG1">打地鼠</button>
+    <button  class="btn three" @click="goToG2">踩白块</button>
+    <button  class="btn four" @click="goToG3">贪吃蛇</button>
   </div>
 </template>
 

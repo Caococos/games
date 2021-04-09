@@ -2,7 +2,7 @@
   <div id="home">
     <div>
       <ul>
-        <li v-for="(item, index) in games.length" :class="{'active': index === currentIndex}" :key="index">Games{{item}}</li>
+        <li v-for="(item, index) in games" :class="{'active': index === currentIndex}" :key="index">{{item}}</li>
       </ul>
     </div>
     <border-click class="borderClick" :message="message" @click.native="move" :style="{pointerEvents: isClick}"/>
@@ -19,8 +19,8 @@ export default {
   data() {
     return {
       message: 'Game Start',
-      games: [1, 2, 3, 4],
-      isClick: 'auto',
+      games: ['打地鼠', '踩白块', '贪吃蛇', '未知'],
+      isClick: 'auto',  //pointerEvents 让元素产生海市蜃楼，幽灵躯体般的效果
       
       //转动需要的变量
       number: 0,  //随机产生的数字
