@@ -11,6 +11,13 @@ module.exports = {
         'network': '@/network',
         'views': '@/views',
       }
-    }
+    },
+  },
+  css: {
+    loaderOptions: {
+      sass: {
+        prependData: `@import "./src/styles/index";`,
+      },
+    },
   }
 }

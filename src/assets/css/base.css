@@ -2,7 +2,7 @@
 
 /*  :root -> 获取根元素html  */
 :root {
-  --color-text: #666;
+  --color-text: #e0dcdc;
   --color-high-text: #ff5777;
   --color-tint: #f574ba;
   --color-background: #fff;
@@ -79,4 +79,9 @@ input {
 /*清除button点击之后的白边框*/
 button:focus {
   outline: 0;
+}
+
+.checkeredWhiteBlock {
+  flex: 1;
+  border: black 1px solid;
 }
