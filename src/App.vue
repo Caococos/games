@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <main-tab/>
-    <router-view/>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
   </div>
 </template>
 
@@ -10,7 +12,7 @@ import MainTab from "@/components/content/MainTab";
 export default {
   name: 'App',
   components: {
-    MainTab
+    MainTab,
   }
 }
 </script>

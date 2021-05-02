@@ -1,9 +1,9 @@
 <template>
   <div class="main-tab">
     <button class="btn one" @click="goToHome">Home</button>
-    <button  class="btn two" @click="goToG1">打地鼠</button>
-    <button  class="btn three" @click="goToG2">踩白块</button>
-    <button  class="btn four" @click="goToG3">贪吃蛇</button>
+    <button  class="btn two" @click="goToGame">Game</button>
+    <button  class="btn three" @click="goToEffects">Effects</button>
+<!--    <button  class="btn four" @click="goToG3">贪吃蛇</button>-->
   </div>
 </template>
 
@@ -14,15 +14,15 @@ export default {
     goToHome() {
       this.$router.push('/')
     },
-    goToG1() {
-      this.$router.push('/game1')
+    goToGame() {
+      this.$router.push('/game')
     },
-    goToG2() {
-      this.$router.push('/game2')
+    goToEffects() {
+      this.$router.push('/effects')
     },
-    goToG3() {
-      this.$router.push('/game3')
-    }
+    // goToG3() {
+    //   this.$router.push('/game3')
+    // }
   }
 }
 </script>

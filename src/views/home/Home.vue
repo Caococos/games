@@ -14,7 +14,7 @@ import BorderClick from "@/components/common/BorderClick";
 export default {
   name: "Home",
   components: {
-    BorderClick
+    BorderClick,
   },
   data() {
     return {
@@ -86,6 +86,9 @@ export default {
         this.timer = setTimeout(this.move, this.speed)  //开始转动
       }
     },
+  },
+  updated() {
+
   }
 }
 </script>
