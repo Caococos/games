@@ -26,7 +26,10 @@
           <div :class="{food: item.type == 'food','snake-header': item.type == 'snakeHeader','snake-body': item.type == 'snakeBody',}"></div>
         </div>
       </div>
-      <!-- </v-touch> -->
+      </v-touch>
+    </div>
+    <div class="title">
+      <h2>{{ msg }}</h2>
     </div>
     <div class="note">
       游戏说明：空格键space 暂停游戏,方向键开始游戏
@@ -219,7 +222,6 @@ export default {
             document.querySelector(".food").classList.remove("food");
           }
           //清空上一局食物
-          v_this.food = {};
           v_this.gameover = false;
           v_this.initSnakeXy();
           v_this.randomFood(); //每局游戏开始新生成一个食物
@@ -272,7 +274,6 @@ export default {
   border: 1px solid;
   width: 15px;
   height: 15px;
-  background-color: #fff;
 }
 .food {
   background-color: red;

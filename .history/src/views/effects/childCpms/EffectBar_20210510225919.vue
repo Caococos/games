@@ -1,43 +1,35 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: Zhihaot1
- * @Date: 2021-05-02 10:49:50
- * @LastEditors: Zhihaot1
- * @LastEditTime: 2021-05-10 22:47:30
--->
 <template>
   <div
     class="bar"
     ref="bar"
   >
     <bar-item
-      message="打地鼠"
-      @click.native="toGame1"
+      message="LinearBall"
+      @click.native="toLinearBall"
     />
     <bar-item
-      message="踩白块"
-      @click.native="toGame2"
+      message="ColorfulBall"
+      @click.native="toColorfulBall"
     />
     <bar-item
-      message="贪吃蛇"
-      @click.native="toGame3"
+      message="Clock"
+      @click.native="toColorfulBall"
     />
     <bar-item
-      message="坦克大战"
-      @click.native="toGame1"
+      message="CSS3"
+      @click.native="toColorfulBall"
     />
     <bar-item
-      message="猫和老鼠"
-      @click.native="toGame1"
+      message="WEBPACK"
+      @click.native="toColorfulBall"
     />
     <bar-item
-      message="小猪佩奇"
-      @click.native="toGame1"
+      message="Canvas"
+      @click.native="toColorfulBall"
     />
     <bar-item
-      message="糖果人"
-      @click.native="toGame1"
+      message="Vue.js"
+      @click.native="toColorfulBall"
     />
   </div>
 </template>
@@ -50,16 +42,12 @@ export default {
     BarItem
   },
   methods: {
-    toGame1() {
-      this.$router.push({ name: "Game1" });
+    toLinearBall() {
+      this.$router.push("linearBall");
     },
-    toGame2() {
-      this.$router.push({ name: "Game2" });
+    toColorfulBall() {
+      this.$router.push({ name: "ColorfulBall" });
     },
-    toGame3() {
-      this.$router.push({ name: "Game3" });
-    },
-
     //  重置scale的函数
     resetScale() {
       this.$refs.bar.childNodes.forEach(li => {

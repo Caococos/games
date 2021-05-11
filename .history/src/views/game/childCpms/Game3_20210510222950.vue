@@ -1,32 +1,35 @@
 <template>
-  <div class="game3">
-    <div class="title">
+  <div>
+    <div>
       <h1>摸鱼贪吃蛇</h1>
       <h2>得分:{{ score }}</h2>
     </div>
     <div class="hello">
-      <!-- <v-touch
+      <v-touch
         v-on:swipeleft="eventTouch(37)"
         v-on:swiperight="eventTouch(39)"
         v-on:swipeup="eventTouch(38)"
         v-on:swipedown="eventTouch(40)"
-      > -->
-      <div
-        class="table"
-        @keyup:click.ctrl="keyEvent"
-        :style="{ width: 15 * size + 'px' }"
       >
         <div
-          v-for="(item, index) in coordinate"
-          :key="index"
-          class="em"
-          :style="{ float: item.y / size !== 1 ? '' : '' }"
-          :item="item.x + '-' + item.y"
+          class="table"
+          @keyup:click.ctrl="keyEvent"
+          :style="{ width: 17 * size + 'px' }"
         >
-          <div :class="{food: item.type == 'food','snake-header': item.type == 'snakeHeader','snake-body': item.type == 'snakeBody',}"></div>
+          <div
+            v-for="(item, index) in coordinate"
+            :key="index"
+            class="em"
+            :style="{ float: item.y / size !== 1 ? '' : '' }"
+            :item="item.x + '-' + item.y"
+          >
+            <div :class="{food: item.type == 'food','snake-header': item.type == 'snakeHeader','snake-body': item.type == 'snakeBody',}"></div>
+          </div>
         </div>
-      </div>
-      <!-- </v-touch> -->
+      </v-touch>
+    </div>
+    <div>
+      <h2>{{ msg }}</h2>
     </div>
     <div class="note">
       游戏说明：空格键space 暂停游戏,方向键开始游戏
@@ -36,7 +39,7 @@
 
 <script>
 export default {
-  name: "Game3",
+  name: "HelloWorld",
   data() {
     return {
       score: 0,
@@ -92,6 +95,7 @@ export default {
   },
   mounted() {
     this.createXy(this.size);
+    this.randomFood();
     this.initSnakeXy();
     this.keyEvent();
   },
@@ -210,20 +214,12 @@ export default {
           break;
       }
     },
-    keyEvent() {
+    keyEvent(event) {
       let v_this = this;
-      document.onkeyup = function(event) {
+      document.onkeydown = function(event) {
         if (v_this.gameover) {
-          let beforeFood = document.querySelector(".food");
-          if (beforeFood) {
-            document.querySelector(".food").classList.remove("food");
-          }
-          //清空上一局食物
-          v_this.food = {};
           v_this.gameover = false;
           v_this.initSnakeXy();
-          v_this.randomFood(); //每局游戏开始新生成一个食物
-          v_this.direction = "";
           v_this.score = 0;
         }
         var e = event || window.event || arguments.callee.caller.arguments[0];
@@ -260,10 +256,6 @@ export default {
   align-items: center;
   justify-content: center;
 }
-.title {
-  text-align: center;
-  margin: 15px;
-}
 .table {
   display: flex;
   flex-wrap: wrap;
@@ -272,7 +264,6 @@ export default {
   border: 1px solid;
   width: 15px;
   height: 15px;
-  background-color: #fff;
 }
 .food {
   background-color: red;
@@ -292,6 +283,5 @@ export default {
 .note {
   margin: 40px;
   font-size: 12px;
-  text-align: center;
 }
 </style>

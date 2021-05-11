@@ -1,15 +1,7 @@
-<!--
- * @Descripttion: 
- * @version: 1.0
- * @Author: Zhihaot1
- * @Date: 2021-03-19 15:51:50
- * @LastEditors: Zhihaot1
- * @LastEditTime: 2021-05-10 22:53:05
--->
 <template>
   <div id="app">
     <main-tab />
-    <keep-alive exclude="Home">
+    <keep-alive exclude="home">
       <router-view />
     </keep-alive>
   </div>

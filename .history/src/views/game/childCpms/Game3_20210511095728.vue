@@ -26,7 +26,10 @@
           <div :class="{food: item.type == 'food','snake-header': item.type == 'snakeHeader','snake-body': item.type == 'snakeBody',}"></div>
         </div>
       </div>
-      <!-- </v-touch> -->
+      </v-touch>
+    </div>
+    <div class="title">
+      <h2>{{ msg }}</h2>
     </div>
     <div class="note">
       游戏说明：空格键space 暂停游戏,方向键开始游戏
@@ -92,6 +95,7 @@ export default {
   },
   mounted() {
     this.createXy(this.size);
+    this.randomFood();
     this.initSnakeXy();
     this.keyEvent();
   },
@@ -170,6 +174,8 @@ export default {
     },
     //控制游戏运行方向
     changeDirection(e) {
+      console.log(this.direction);
+
       let v_this = this;
       v_this.msg = "游戏开始";
       switch (e && e.keyCode) {
@@ -214,16 +220,10 @@ export default {
       let v_this = this;
       document.onkeyup = function(event) {
         if (v_this.gameover) {
-          let beforeFood = document.querySelector(".food");
-          if (beforeFood) {
-            document.querySelector(".food").classList.remove("food");
-          }
-          //清空上一局食物
-          v_this.food = {};
           v_this.gameover = false;
           v_this.initSnakeXy();
-          v_this.randomFood(); //每局游戏开始新生成一个食物
-          v_this.direction = "";
+          V_this.randomFood();
+          V_this.direction = "";
           v_this.score = 0;
         }
         var e = event || window.event || arguments.callee.caller.arguments[0];
@@ -272,7 +272,6 @@ export default {
   border: 1px solid;
   width: 15px;
   height: 15px;
-  background-color: #fff;
 }
 .food {
   background-color: red;

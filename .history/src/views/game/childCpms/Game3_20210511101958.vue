@@ -26,7 +26,10 @@
           <div :class="{food: item.type == 'food','snake-header': item.type == 'snakeHeader','snake-body': item.type == 'snakeBody',}"></div>
         </div>
       </div>
-      <!-- </v-touch> -->
+      </v-touch>
+    </div>
+    <div class="title">
+      <h2>{{ msg }}</h2>
     </div>
     <div class="note">
       游戏说明：空格键space 暂停游戏,方向键开始游戏
@@ -272,7 +275,7 @@ export default {
   border: 1px solid;
   width: 15px;
   height: 15px;
-  background-color: #fff;
+  background-color: rgb(243, 221, 221);
 }
 .food {
   background-color: red;

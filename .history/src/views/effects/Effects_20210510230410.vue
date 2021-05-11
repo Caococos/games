@@ -19,10 +19,10 @@ export default {
   name: "Effects",
   components: {
     EffectBar
+  },
+  activated() {
+    this.$router.push({ name: "LinearBall" });
   }
-  // activated() {
-  //   this.$router.push({ name: "LinearBall" });
-  // }
 };
 </script>
 

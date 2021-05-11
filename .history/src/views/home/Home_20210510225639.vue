@@ -53,16 +53,16 @@ export default {
         //转完之后再次点击可以进入详细游戏界面
         switch (this.currentIndex) {
           case 0:
-            this.$router.push("/game");
+            this.$router.push("game1");
             break;
           case 1:
-            this.$router.push("/game/game2");
+            this.$router.push("game2");
             break;
           case 2:
-            this.$router.push("/game/game3");
+            this.$router.push("game3");
             break;
           case 3:
-            this.$router.push("/game/game4");
+            this.$router.push("game4");
             break;
         }
       }

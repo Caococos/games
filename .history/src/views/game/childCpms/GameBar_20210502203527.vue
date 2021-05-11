@@ -3,42 +3,18 @@
  * @version: 
  * @Author: Zhihaot1
  * @Date: 2021-05-02 10:49:50
- * @LastEditors: Zhihaot1
- * @LastEditTime: 2021-05-10 22:47:30
+ * @LastEditors: 
+ * @LastEditTime: 2021-05-02 20:35:23
 -->
 <template>
-  <div
-    class="bar"
-    ref="bar"
-  >
-    <bar-item
-      message="打地鼠"
-      @click.native="toGame1"
-    />
-    <bar-item
-      message="踩白块"
-      @click.native="toGame2"
-    />
-    <bar-item
-      message="贪吃蛇"
-      @click.native="toGame3"
-    />
-    <bar-item
-      message="坦克大战"
-      @click.native="toGame1"
-    />
-    <bar-item
-      message="猫和老鼠"
-      @click.native="toGame1"
-    />
-    <bar-item
-      message="小猪佩奇"
-      @click.native="toGame1"
-    />
-    <bar-item
-      message="糖果人"
-      @click.native="toGame1"
-    />
+  <div class="bar" ref="bar">
+    <bar-item message="打地鼠" @click.native="toGame1" />
+    <bar-item message="踩白块" @click.native="toGame2" />
+    <bar-item message="贪吃蛇" @click.native="toGame3" />
+    <bar-item message="坦克大战" @click.native="toGame1" />
+    <bar-item message="猫和老鼠" @click.native="toGame1" />
+    <bar-item message="小猪佩奇" @click.native="toGame1" />
+    <bar-item message="糖果人" @click.native="toGame1" />
   </div>
 </template>
 
@@ -47,7 +23,7 @@ import BarItem from "@/components/content/tabBar/BarItem";
 export default {
   name: "TabBar",
   components: {
-    BarItem
+    BarItem,
   },
   methods: {
     toGame1() {
@@ -62,15 +38,15 @@ export default {
 
     //  重置scale的函数
     resetScale() {
-      this.$refs.bar.childNodes.forEach(li => {
+      this.$refs.bar.childNodes.forEach((li) => {
         li.style.setProperty("--scale", 1);
       });
-    }
+    },
   },
   mounted() {
     this.$nextTick(() => {
-      this.$refs.bar.childNodes.forEach(li => {
-        li.addEventListener("mousemove", e => {
+      this.$refs.bar.childNodes.forEach((li) => {
+        li.addEventListener("mousemove", (e) => {
           let item = e.target;
           let itemRect = item.getBoundingClientRect();
           let offset = Math.abs(e.clientY - itemRect.top) / itemRect.height;
@@ -93,12 +69,12 @@ export default {
         });
 
         //  离开父盒子
-        this.$refs.bar.addEventListener("mouseleave", e => {
+        this.$refs.bar.addEventListener("mouseleave", (e) => {
           this.resetScale();
         });
       });
     });
-  }
+  },
 };
 </script>
 
@@ -107,7 +83,6 @@ export default {
   position: absolute;
   top: 38px;
   left: 0;
-  z-index: 10;
   margin-left: 10px;
   --scale: 1;
   width: 80px;

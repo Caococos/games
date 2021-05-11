@@ -27,7 +27,7 @@ export default {
       this.$router.push("/game/game1");
     },
     goToEffects() {
-      this.$router.push("/effects/linearBall");
+      this.$router.push("/effects/");
     }
     // goToG3() {
     //   this.$router.push('/game3')

@@ -28,6 +28,9 @@
       </div>
       <!-- </v-touch> -->
     </div>
+    <div class="title">
+      <h2>{{ msg }}</h2>
+    </div>
     <div class="note">
       游戏说明：空格键space 暂停游戏,方向键开始游戏
     </div>
