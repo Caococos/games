@@ -1,36 +1,20 @@
 <template>
   <div class="game3">
     <div class="title">
-      <h1>摸鱼贪吃蛇</h1>
+      <h1>贪吃蛇</h1>
       <h2>得分:{{ score }}</h2>
     </div>
     <div class="hello">
-      <!-- <v-touch
-        v-on:swipeleft="eventTouch(37)"
-        v-on:swiperight="eventTouch(39)"
-        v-on:swipeup="eventTouch(38)"
-        v-on:swipedown="eventTouch(40)"
-      > -->
-      <div
-        class="table"
-        @keyup:click.ctrl="keyEvent"
-        :style="{ width: 15 * size + 'px' }"
-      >
-        <div
-          v-for="(item, index) in coordinate"
-          :key="index"
-          class="em"
-          :style="{ float: item.y / size !== 1 ? '' : '' }"
-          :item="item.x + '-' + item.y"
-        >
+      <div class="table" @keyup:click.ctrl="keyEvent" :style="{ width: 15 * size + 'px' }">
+        <div v-for="(item, index) in coordinate" :key="index" class="em" :style="{ float: item.y / size !== 1 ? '' : '' }" :item="item.x + '-' + item.y">
           <div :class="{food: item.type == 'food','snake-header': item.type == 'snakeHeader','snake-body': item.type == 'snakeBody',}"></div>
         </div>
       </div>
-      <!-- </v-touch> -->
     </div>
     <div class="note">
       游戏说明：空格键space 暂停游戏,方向键开始游戏
     </div>
+    <div class="tips">{{msg}}</div>
   </div>
 </template>
 
@@ -132,7 +116,7 @@ export default {
       this.moveTimer = setInterval(() => {
         const head = v_this.snake[0];
         if (v_this.direction === "down") {
-          v_this.updateSnake({ x: head.x + 1, y: head.y });
+          v_this.updateSnake({ x: head.x + 1, y: head.y });  //将蛇头前面一个格子的x,y传递到updateSnake中
         }
         if (v_this.direction === "right") {
           v_this.updateSnake({ x: head.x, y: head.y + 1 });
@@ -147,23 +131,31 @@ export default {
     },
     //修改snake 数组的变化
     updateSnake(head) {
-      if (
+      const isEatBody = this.snake.find(item => {  //判断蛇头是否吃到身体
+        console.log(item);
+        if (head.x === item.x && head.y === item.y) {
+          return true
+        }
+      })
+      if (  //当蛇头的位置在圈外就结束游戏
         head.x < 1 ||
         head.x > this.size ||
         head.y < 1 ||
-        head.y > this.size
+        head.y > this.size ||
+        isEatBody
       ) {
         //游戏结束
         clearInterval(this.moveTimer);
+        this.$toast.show(`游戏结束，你的得分为${this.score}`)
         this.msg = "GameOver！";
         this.gameover = true;
         return;
       }
-      if (head.x === this.food.x && head.y === this.food.y) {
-        this.snake.unshift(head);
-        this.randomFood();
-        this.score++;
-      } else {
+      if (head.x === this.food.x && head.y === this.food.y) { //吃到食物的情况
+        this.snake.unshift(head);  //增加长度
+        this.randomFood();  //再随机生成一个食物
+        this.score++;  //分数+1
+      } else {  //没有吃到食物的情况
         this.snake.unshift(head);
         this.snake.pop();
       }
@@ -171,7 +163,6 @@ export default {
     //控制游戏运行方向
     changeDirection(e) {
       let v_this = this;
-      v_this.msg = "游戏开始";
       switch (e && e.keyCode) {
         case 37:
           console.info("37=左键");
@@ -212,8 +203,9 @@ export default {
     },
     keyEvent() {
       let v_this = this;
-      document.onkeyup = function(event) {
+      document.onkeyup = function (event) {
         if (v_this.gameover) {
+
           let beforeFood = document.querySelector(".food");
           if (beforeFood) {
             document.querySelector(".food").classList.remove("food");
@@ -230,15 +222,6 @@ export default {
         v_this.changeDirection(e);
       };
     },
-    //移动端滑动事件
-    eventTouch(direction) {
-      if (this.gameover) {
-        this.gameover = false;
-        this.initSnakeXy();
-        this.score = 0;
-      }
-      this.changeDirection({ keyCode: direction });
-    },
 
     /**
      * 产生随机整数，包含下限值，但不包括上限值
@@ -250,7 +233,7 @@ export default {
       return Math.floor(Math.random() * (upper - lower)) + lower;
     }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -292,6 +275,10 @@ export default {
 .note {
   margin: 40px;
   font-size: 12px;
+  text-align: center;
+}
+.tips {
+  font-size: 20px;
   text-align: center;
 }
 </style>

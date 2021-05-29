@@ -2,19 +2,10 @@
   <div id="home">
     <div>
       <ul>
-        <li
-          v-for="(item, index) in games"
-          :class="{'active': index === currentIndex}"
-          :key="index"
-        >{{item}}</li>
+        <li v-for="(item, index) in games" :class="{'active': index === currentIndex}" :key="index">{{item}}</li>
       </ul>
     </div>
-    <border-click
-      class="borderClick"
-      :message="message"
-      @click.native="move"
-      :style="{pointerEvents: isClick}"
-    />
+    <border-click class="borderClick" :message="message" @click.native="move" :style="{pointerEvents: isClick}" />
   </div>
 </template>
 
@@ -44,7 +35,7 @@ export default {
     //开始转动
     move() {
       if (this.message === "Game Start") {
-        //这里点击一次之后会调用多次
+        //这里点击一次之后会调用多次,故用if条件限制，防止用户多次点击
         this.isClick = "none";
         this.times += 1; //转动次数
         this.oneRoll(); //转动过程调用的每一次转动方法
@@ -81,7 +72,7 @@ export default {
     },
 
     useNumber() {
-      //如果当前转动次数达到要求 && 目前转到的位置是中奖位置
+      //如果当前转动次数达到要求 && 目前转到的位置是目标位置
       if (this.times > this.cycle + 10 && this.number === this.currentIndex) {
         clearTimeout(this.timer); //清除转动定时器
         this.times = 0; //转动跑格子次数初始化为0，可以进行下一次抽奖
@@ -97,8 +88,7 @@ export default {
         this.timer = setTimeout(this.move, this.speed); //开始转动
       }
     }
-  },
-  updated() {}
+  }
 };
 </script>
 
