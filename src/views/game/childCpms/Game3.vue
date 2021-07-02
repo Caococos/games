@@ -131,12 +131,7 @@ export default {
     },
     //修改snake 数组的变化
     updateSnake(head) {
-      const isEatBody = this.snake.find(item => {  //判断蛇头是否吃到身体
-        console.log(item);
-        if (head.x === item.x && head.y === item.y) {
-          return true
-        }
-      })
+      const isEatBody = this.snake.find(item => head.x === item.x && head.y === item.y)  //判断蛇头是否吃到身体)
       if (  //当蛇头的位置在圈外就结束游戏
         head.x < 1 ||
         head.x > this.size ||
