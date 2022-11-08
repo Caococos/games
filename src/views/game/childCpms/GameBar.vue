@@ -1,107 +1,70 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: Zhihaot1
- * @Date: 2021-05-02 10:49:50
- * @LastEditors: Zhihaot1
- * @LastEditTime: 2021-05-10 22:47:30
--->
 <template>
-  <div
-    class="bar"
-    ref="bar"
-  >
-    <bar-item
-      message="打地鼠"
-      @click.native="toGame1"
-    />
-    <bar-item
-      message="踩白块"
-      @click.native="toGame2"
-    />
-    <bar-item
-      message="贪吃蛇"
-      @click.native="toGame3"
-    />
-    <bar-item
-      message="坦克大战"
-      @click.native="toGame1"
-    />
-    <bar-item
-      message="猫和老鼠"
-      @click.native="toGame1"
-    />
-    <bar-item
-      message="小猪佩奇"
-      @click.native="toGame1"
-    />
-    <bar-item
-      message="糖果人"
-      @click.native="toGame1"
-    />
+  <div class="bar" ref="bar">
+    <BarItem message="打地鼠" @click.native="toGame1" />
+    <BarItem message="踩白块" @click.native="toGame2" />
+    <BarItem message="贪吃蛇" @click.native="toGame3" />
+    <BarItem message="坦克大战" @click.native="toGame1" />
+    <BarItem message="猫和老鼠" @click.native="toGame1" />
+    <BarItem message="小猪佩奇" @click.native="toGame1" />
+    <BarItem message="糖果人" @click.native="toGame1" />
   </div>
 </template>
 
-<script>
-import BarItem from "@/components/content/tabBar/BarItem";
-export default {
-  name: "TabBar",
-  components: {
-    BarItem
-  },
-  methods: {
-    toGame1() {
-      this.$router.push({ name: "Game1" });
-    },
-    toGame2() {
-      this.$router.push({ name: "Game2" });
-    },
-    toGame3() {
-      this.$router.push({ name: "Game3" });
-    },
+<script lang="ts" setup>
+import BarItem from '@/components/content/BarItem.vue'
+import { ref, computed, onMounted, nextTick } from 'vue'
+import { useRouter } from 'vue-router'
 
-    //  重置scale的函数
-    resetScale() {
-      this.$refs.bar.childNodes.forEach(li => {
-        li.style.setProperty("--scale", 1);
-      });
-    }
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.$refs.bar.childNodes.forEach(li => {
-        li.addEventListener("mousemove", e => {
-          let item = e.target;
-          let itemRect = item.getBoundingClientRect();
-          let offset = Math.abs(e.clientY - itemRect.top) / itemRect.height;
+const router = useRouter()
+const bar = ref<HTMLElement>()
+
+const toGame1 = () => router.push({ name: 'Game1' })
+const toGame2 = () => router.push({ name: 'Game2' })
+const toGame3 = () => router.push({ name: 'Game3' })
+const resetScale = () => {
+  if (bar.value) {
+    bar.value.childNodes.forEach((li) => {
+      ;(li as HTMLElement).style.setProperty('--scale', '1')
+    })
+  }
+}
+
+onMounted(() => {
+  nextTick(() => {
+    if (bar.value) {
+      bar.value.childNodes.forEach((li) => {
+        li.addEventListener('mousemove', (e) => {
+          let item = e.target as HTMLElement
+          let itemRect = item.getBoundingClientRect()
+          //@ts-ignore
+          let offset = Math.abs(e.clientY - itemRect.top) / itemRect.height
 
           //获取前后两个元素
-          let prev = item.previousElementSibling || null;
-          let next = item.nextElementSibling || null;
+          let prev = (item.previousElementSibling as HTMLElement) || null
+          let next = (item.nextElementSibling as HTMLElement) || null
 
           //重置scale
-          this.resetScale();
+          resetScale()
 
-          let scale = 0.3; //图标放到最大1.6倍
+          let scale = 0.3 //图标放到最大1.6倍
           if (prev) {
-            prev.style.setProperty("--scale", 1 + scale * Math.abs(offset - 1));
+            prev.style.setProperty('--scale', String(1 + scale * Math.abs(offset - 1)))
           }
-          item.style.setProperty("--scale", 1 + scale);
+          item.style.setProperty('--scale', String(1 + scale))
           if (next) {
-            next.style.setProperty("--scale", 1 + scale * offset);
+            next.style.setProperty('--scale', String(1 + scale * offset))
           }
-        });
+        })
 
         //  离开父盒子
-        this.$refs.bar.addEventListener("mouseleave", e => {
-          this.resetScale();
-        });
-      });
-    });
-  }
-};
+        ;(bar.value as HTMLElement).addEventListener('mouseleave', (e) => {
+          resetScale()
+        })
+      })
+    }
+  })
+})
 </script>
-
 <style scoped lang="scss">
 .bar {
   position: absolute;

@@ -1,26 +1,24 @@
 <template>
   <div class="neon-button">
-    <button class="btn" :class="colorType">{{message}}</button>
+    <button class="btn" :class="colorType">{{ props.message }}</button>
   </div>
 </template>
 
-<script>
-export default {
-  name: "NeonButton",
-  props: { //可以传文字和按钮的颜色类型
-    message: {
-      type: String,
-      default: ''
-    },
-    colorType: {
-      type: String,
-      default: 'one'
-    }
+<script lang="ts" setup>
+//可以传文字和按钮的颜色类型
+const props = withDefaults(
+  defineProps<{
+    message: string
+    colorType: string
+  }>(),
+  {
+    message: '',
+    colorType: 'one'
   }
-}
+)
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .btn {
   padding: 10px 20px;
   border: 1px solid;
@@ -28,7 +26,7 @@ export default {
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 300;
-  outline: 0;    /* 消除点击button之后的白边 */
+  outline: 0; /* 消除点击button之后的白边 */
 }
 
 .one {
@@ -79,9 +77,8 @@ export default {
 .four:hover {
   background-color: #4cc9f0;
   -webkit-box-shadow: 10px 10px 99px 6px rgb(76, 201, 240);
-  -moz-box-shadow: 10px 10px 99px 6px rgba(76,201,240,1);
-  box-shadow: 10px 10px 99px 6px rgba(76,201,240,1);
+  -moz-box-shadow: 10px 10px 99px 6px rgba(76, 201, 240, 1);
+  box-shadow: 10px 10px 99px 6px rgba(76, 201, 240, 1);
   border-color: #4cc9f0;
 }
-
 </style>

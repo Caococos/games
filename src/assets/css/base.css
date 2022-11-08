@@ -5,7 +5,7 @@
   --color-text: #e0dcdc;
   --color-high-text: #ff5777;
   --color-tint: #f574ba;
-  --color-background: #fff;
+  --color-background: #0b2845;
   --font-size: 14px;
   --line-height: 1.5;
 }
@@ -84,4 +84,10 @@ button:focus {
 .checkeredWhiteBlock {
   flex: 1;
   border: black 1px solid;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }

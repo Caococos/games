@@ -1,35 +1,33 @@
-<!--
- * @Descripttion: 
- * @version: 1.0
- * @Author: Zhihaot1
- * @Date: 2021-03-19 15:51:50
- * @LastEditors: Zhihaot1
- * @LastEditTime: 2021-05-10 22:53:05
--->
 <template>
-  <div id="app">
-    <main-tab />
-    <keep-alive exclude="Home">
-      <router-view />
-    </keep-alive>
-  </div>
+  <MainTab />
+  <keep-alive exclude="Home">
+    <router-view />
+  </keep-alive>
 </template>
 
-<script>
-import MainTab from "@/components/content/MainTab";
-export default {
-  name: "App",
-  components: {
-    MainTab
-  }
-};
+<script lang="ts" setup>
+import MainTab from './components/content/MainTab.vue'
 </script>
 
-<style>
-@import "~@/assets/css/base.css";
-body {
-  background: #0b2845;
-  background-size: cover;
-  overflow: hidden;
+<style lang="scss">
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+nav {
+  padding: 30px;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
 }
 </style>

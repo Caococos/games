@@ -1,20 +1,17 @@
 <template>
-  <div class="bar-item">{{message}}</div>
+  <div class="bar-item">{{ props.message }}</div>
 </template>
 
-<script>
-export default {
-  name: "BarItem",
-  props: {
-    message: {
-      type: String,
-      default: '未定义'
-    }
-  }
-}
+<script lang="ts" setup>
+const props = withDefaults(
+  defineProps<{
+    message: string
+  }>(),
+  { message: '未定义' }
+)
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .bar-item {
   margin-bottom: 5px;
   width: 80px;
@@ -23,7 +20,7 @@ export default {
   text-align: center;
   border-radius: 50%;
   font-size: 12px;
-  background-color: rgba(0, 0, 0, .2);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .bar-item:hover {

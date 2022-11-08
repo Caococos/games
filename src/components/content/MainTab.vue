@@ -1,42 +1,23 @@
 <template>
   <div class="main-tab">
-    <button
-      class="btn one"
-      @click="goToHome"
-    >Home</button>
-    <button
-      class="btn two"
-      @click="goToGame"
-    >Game</button>
-    <button
-      class="btn three"
-      @click="goToEffects"
-    >Effects</button>
+    <button class="btn one" @click="goToHome">Home</button>
+    <button class="btn two" @click="goToGame">Game</button>
+    <button class="btn three" @click="goToEffects">Effects</button>
     <!--    <button  class="btn four" @click="goToG3">贪吃蛇</button>-->
   </div>
 </template>
 
-<script>
-export default {
-  name: "MainTab",
-  methods: {
-    goToHome() {
-      this.$router.push("/");
-    },
-    goToGame() {
-      this.$router.push("/game/game1");
-    },
-    goToEffects() {
-      this.$router.push("/effects/linearBall");
-    }
-    // goToG3() {
-    //   this.$router.push('/game3')
-    // }
-  }
-};
+<script lang="ts" setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const goToHome = () => router.push('/')
+const goToGame = () => router.push('/game/game1')
+const goToEffects = () => router.push('/effects/linearBall')
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .main-tab {
   display: flex;
   justify-content: space-around;

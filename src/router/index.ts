@@ -1,23 +1,20 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-//主页
-const Home = () => import('@/views/home/Home')
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import Home from '@/views/home/Home.vue'
 
 //特效
-const Effects = () => import('@/views/effects/Effects')
-const LinearBall = () => import('@/views/effects/childCpms/LinearBall')
-const ColorfulBall = () => import('@/views/effects/childCpms/ColorfulBall')
+const Effects = () => import('@/views/effects/Effects.vue')
+const LinearBall = () => import('@/views/effects/childCpms/LinearBall.vue')
+const ColorfulBall = () => import('@/views/effects/childCpms/ColorfulBall.vue')
 
 //游戏
-const Game = () => import('@/views/game/Game')
-const Game1 = () => import('@/views/game/childCpms/Game1')
-const Game2 = () => import('@/views/game/childCpms/Game2')
-const Game3 = () => import('@/views/game/childCpms/Game3')
-const Game4 = () => import('@/views/game/childCpms/Game4')
+const Game = () => import('@/views/game/Game.vue')
+const Game1 = () => import('@/views/game/childCpms/Game1.vue')
+const Game2 = () => import('@/views/game/childCpms/Game2.vue')
+const Game3 = () => import('@/views/game/childCpms/Game3.vue')
+const Game4 = () => import('@/views/game/childCpms/Game4.vue')
+const Game5 = () => import('@/views/game/childCpms/Game5.vue')
 
-Vue.use(VueRouter)
-
-const routes = [
+const routes: Array<RouteRecordRaw> = [
   {
     path: '',
     redirect: '/home'
@@ -71,12 +68,17 @@ const routes = [
         component: Game4,
         name: 'Game4'
       },
+      {
+        path: 'game5',
+        component: Game5,
+        name: 'Game5'
+      }
     ]
   },
-
 ]
 
-const router = new VueRouter({
+const router = createRouter({
+  history: createWebHashHistory(),
   routes
 })
 

@@ -2,97 +2,89 @@
   <div id="home">
     <div>
       <ul>
-        <li v-for="(item, index) in games" :class="{'active': index === currentIndex}" :key="index">{{item}}</li>
+        <li v-for="(item, index) in games" :class="{ active: index === currentIndex }" :key="index">{{ item }}</li>
       </ul>
     </div>
-    <border-click class="borderClick" :message="message" @click.native="move" :style="{pointerEvents: isClick}" />
+    <BorderClick class="borderClick" :message="message" @click.native="move" :style="{ pointerEvents: isClick }" />
   </div>
 </template>
 
-<script>
-import BorderClick from "@/components/common/BorderClick";
-export default {
-  name: "Home",
-  components: {
-    BorderClick
-  },
-  data() {
-    return {
-      message: "Game Start",
-      games: ["打地鼠", "踩白块", "贪吃蛇", "未知"],
-      isClick: "auto", //pointerEvents 让元素产生海市蜃楼，幽灵躯体般的效果
+<script lang="ts" setup>
+import BorderClick from '@/components/common/BorderClick.vue'
+import { ref, computed, onMounted, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 
-      //转动需要的变量
-      number: 0, //随机产生的数字
-      currentIndex: -1, //当前转到哪个位置
-      cycle: 20, // 转动基本次数：即至少需要转动多少次再进入抽奖环节
-      speed: 40, //初始转动速度
-      times: 0, //转动跑格子次数
-      timer: 0 //转动定时器
-    };
-  },
-  methods: {
-    //开始转动
-    move() {
-      if (this.message === "Game Start") {
-        //这里点击一次之后会调用多次,故用if条件限制，防止用户多次点击
-        this.isClick = "none";
-        this.times += 1; //转动次数
-        this.oneRoll(); //转动过程调用的每一次转动方法
-        this.useNumber();
-      } else {
-        //转完之后再次点击可以进入详细游戏界面
-        switch (this.currentIndex) {
-          case 0:
-            this.$router.push("/game");
-            break;
-          case 1:
-            this.$router.push("/game/game2");
-            break;
-          case 2:
-            this.$router.push("/game/game3");
-            break;
-          case 3:
-            this.$router.push("/game/game4");
-            break;
-        }
-      }
-    },
+const router = useRouter()
 
-    //每一次转动
-    oneRoll() {
-      this.number = Math.ceil(Math.random() * 4); //获取随机数
-      let index = this.currentIndex; //当前转到哪个位置
-      const count = this.games.length; //总共有多少个游戏
-      index += 1;
-      if (index > count - 1) {
-        index = 0;
-      }
-      this.currentIndex = index;
-    },
+const message = ref('Game Start')
+const games = reactive(['打地鼠', '踩白块', '贪吃蛇', '奔跑吧陈签'])
+const isClick = ref('auto')
+const number = ref(0)
+const currentIndex = ref(-1)
+const cycle = ref(20)
+const speed = ref(40)
+const times = ref(0)
+const timer = ref(0)
 
-    useNumber() {
-      //如果当前转动次数达到要求 && 目前转到的位置是目标位置
-      if (this.times > this.cycle + 10 && this.number === this.currentIndex) {
-        clearTimeout(this.timer); //清除转动定时器
-        this.times = 0; //转动跑格子次数初始化为0，可以进行下一次抽奖
-
-        this.message = "Go!!!";
-        this.isClick = "auto"; //让盒子能够点击
-      } else {
-        if (this.times < this.cycle - 20) {
-          this.speed -= 4; //加快转动速度
-        } else {
-          this.speed += 10; //转动即将结束，放慢转动速度
-        }
-        this.timer = setTimeout(this.move, this.speed); //开始转动
-      }
+const move = () => {
+  if (message.value === 'Game Start') {
+    //这里点击一次之后会调用多次,故用if条件限制，防止用户多次点击
+    isClick.value = 'none'
+    times.value += 1 //转动次数
+    oneRoll() //转动过程调用的每一次转动方法
+    useNumber()
+  } else {
+    //转完之后再次点击可以进入详细游戏界面
+    switch (currentIndex.value) {
+      case 0:
+        router.push('/game')
+        break
+      case 1:
+        router.push('/game/game2')
+        break
+      case 2:
+        router.push('/game/game3')
+        break
+      case 3:
+        router.push('/game/game4')
+        break
     }
   }
-};
+}
+const oneRoll = () => {
+  number.value = Math.ceil(Math.random() * 4) //获取随机数
+  let index = currentIndex.value //当前转到哪个位置
+  const count = games.length //总共有多少个游戏
+  index += 1
+  if (index > count - 1) {
+    index = 0
+  }
+  currentIndex.value = index
+}
+const useNumber = () => {
+  //如果当前转动次数达到要求 && 目前转到的位置是目标位置
+  if (times.value > cycle.value + 10 && number.value === currentIndex.value) {
+    clearTimeout(timer.value) //清除转动定时器
+    times.value = 0 //转动跑格子次数初始化为0，可以进行下一次抽奖
+
+    message.value = 'Go!!!'
+    isClick.value = 'auto' //让盒子能够点击
+  } else {
+    if (times.value < cycle.value - 20) {
+      speed.value -= 4 //加快转动速度
+    } else {
+      speed.value += 10 //转动即将结束，放慢转动速度
+    }
+    timer.value = setTimeout(move, speed.value) //开始转动
+  }
+}
+interface dataProps {}
+const props = defineProps({})
+const emit = defineEmits(['change', 'delete'])
+const count = ref(0)
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 #home {
   position: absolute;
   top: 50%;
@@ -108,17 +100,16 @@ ul {
   width: 500px;
   height: 500px;
   list-style: none;
-}
-
-li {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  border-radius: 5px;
-  background-color: #000;
-  color: #7f3030;
-  text-align: center;
-  line-height: 100px;
+  li {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    background-color: #000;
+    color: #7f3030;
+    text-align: center;
+    line-height: 100px;
+  }
 }
 
 li:nth-child(1) {

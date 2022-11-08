@@ -1,20 +1,12 @@
 <template>
   <div class="btn-container">
-    <img class="svg" src="~@/assets/img/shideright39.svg" alt="">
-    <button>{{message}}</button>
+    <img class="svg" src="~@/assets/img/shideright39.svg" alt="" />
+    <button>{{ props.message }}</button>
   </div>
 </template>
 
-<script>
-export default {
-  name: "RadiusClick",
-  props: {
-    message: {
-      type: String,
-      default: 'Hover me'
-    }
-  }
-}
+<script lang="ts" setup>
+const props = withDefaults(defineProps<{ message: string }>(), { message: 'Hover me' })
 </script>
 
 <style scoped>
@@ -32,7 +24,7 @@ button {
   background: linear-gradient(to right, #f72585 50%, #5f55af 50%);
   background-size: 200% 100%;
   background-position: right bottom;
-  transition:all 2s ease;
+  transition: all 2s ease;
 }
 
 .svg {
