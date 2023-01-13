@@ -2,6 +2,7 @@
   "name": "web_game",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://caococos.github.io/games",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
