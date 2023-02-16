@@ -1,5 +1,15 @@
 <template>
   <MainTab />
+  <WatchingYou v-slot="watchingYouProps" :active="true">
+    <!-- another options...-->
+    <div
+      style="color: #fff; pointer-events: none"
+      :className="watchingYouProps.className"
+      :style="watchingYouProps.style"
+    >
+      O
+    </div>
+  </WatchingYou>
   <keep-alive exclude="Home">
     <router-view />
   </keep-alive>
@@ -7,6 +17,7 @@
 
 <script lang="ts" setup>
 import MainTab from './components/content/MainTab.vue'
+import WatchingYou from 'vue-watching-you'
 </script>
 
 <style lang="scss">
