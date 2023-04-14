@@ -8,6 +8,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "current-device": "^0.10.2",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vue-watching-you": "^0.0.8"

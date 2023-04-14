@@ -32,10 +32,10 @@ button {
   padding: 16px;
   border-radius: 50%;
   position: absolute;
-  left: 0;
-  top: 0%;
 }
-
+.svg:hover + button {
+  background-position: left bottom;
+}
 button:hover {
   background-position: left bottom;
 }
