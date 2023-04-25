@@ -3,10 +3,10 @@
     <BarItem message="打地鼠" @click.native="toGame1" />
     <BarItem message="踩白块" @click.native="toGame2" />
     <BarItem message="贪吃蛇" @click.native="toGame3" />
-    <BarItem message="坦克大战" @click.native="toGame1" />
-    <BarItem message="猫和老鼠" @click.native="toGame1" />
-    <BarItem message="小猪佩奇" @click.native="toGame1" />
-    <BarItem message="糖果人" @click.native="toGame1" />
+    <BarItem message="PS快捷键" @click.native="toGame4" />
+    <BarItem message="猫和老鼠" @click.native="toGame5" />
+    <BarItem message="小猪佩奇" @click.native="toGame5" />
+    <BarItem message="糖果人" @click.native="toGame5" />
   </div>
 </template>
 
@@ -21,6 +21,10 @@ const bar = ref<HTMLElement>()
 const toGame1 = () => router.push({ name: 'Game1' })
 const toGame2 = () => router.push({ name: 'Game2' })
 const toGame3 = () => router.push({ name: 'Game3' })
+const toGame4 = () => router.push({ name: 'Game4' })
+const toGame5 = () => router.push({ name: 'Game5' })
+const toGame6 = () => router.push({ name: 'Game6' })
+const toGame7 = () => router.push({ name: 'Game7' })
 const resetScale = () => {
   if (bar.value) {
     bar.value.childNodes.forEach((li) => {
