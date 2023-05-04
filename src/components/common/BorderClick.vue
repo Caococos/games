@@ -19,6 +19,7 @@ button {
   outline: none;
   padding: 10px 20px;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 button::before,

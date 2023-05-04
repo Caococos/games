@@ -25,6 +25,7 @@ button {
   background-size: 200% 100%;
   background-position: right bottom;
   transition: all 2s ease;
+  cursor: pointer;
 }
 
 .svg {

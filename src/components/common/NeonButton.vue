@@ -27,6 +27,7 @@ const props = withDefaults(
   font-size: 14px;
   font-weight: 300;
   outline: 0; /* 消除点击button之后的白边 */
+  cursor: pointer;
 }
 
 .one {
