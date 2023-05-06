@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <!-- 工具箱 -->
+    <!-- 1工具箱 -->
     <div class="column_wra">
       <h5 class="head">工具箱</h5>
       <div class="body" v-for="item in arr1">
@@ -8,7 +8,7 @@
         <p>{{ item.name }}</p>
       </div>
     </div>
-    <!-- 文件操作 -->
+    <!-- 2文件操作 -->
     <div class="column_wra">
       <h5 class="head">文件操作</h5>
       <div class="body" v-for="item in arr2">
@@ -16,15 +16,15 @@
         <p>{{ item.name }}</p>
       </div>
     </div>
-    <!-- 编辑操作 -->
+    <!-- 3编辑操作 -->
     <div class="column_wra">
       <h5 class="head">编辑操作</h5>
-      <div class="body" v-for="item in arr7">
+      <div class="body" v-for="item in arr6">
         <p>{{ item.keys }}</p>
         <p>{{ item.name }}</p>
       </div>
     </div>
-    <!-- 图层混合 -->
+    <!-- 4图层混合 -->
     <div class="column_wra">
       <h5 class="head">图层混合</h5>
       <div class="body" v-for="item in arr3">
@@ -32,7 +32,7 @@
         <p>{{ item.name }}</p>
       </div>
     </div>
-    <!-- 选择功能 -->
+    <!-- 5选择功能 -->
     <div class="column_wra">
       <h5 class="head">选择功能</h5>
       <div class="body" v-for="item in arr4">
@@ -40,7 +40,7 @@
         <p>{{ item.name }}</p>
       </div>
     </div>
-    <!-- 滤镜 -->
+    <!-- 6滤镜 -->
     <div class="column_wra">
       <h5 class="head">滤镜</h5>
       <div class="body" v-for="item in arr5">
@@ -48,18 +48,26 @@
         <p>{{ item.name }}</p>
       </div>
     </div>
-    <!-- 图层操作 -->
+    <!--7 图层操作 -->
     <div class="column_wra">
-      <h5 class="head">滤镜</h5>
+      <h5 class="head">图层操作</h5>
       <div class="body" v-for="item in arr8">
         <p>{{ item.keys }}</p>
         <p>{{ item.name }}</p>
       </div>
     </div>
-    <!-- 图像调整 -->
+    <!--8图像调整 -->
     <div class="column_wra">
-      <h5 class="head">滤镜</h5>
+      <h5 class="head">图像调整</h5>
       <div class="body" v-for="item in arr8">
+        <p>{{ item.keys }}</p>
+        <p>{{ item.name }}</p>
+      </div>
+    </div>
+    <!-- 9视图操作 -->
+    <div class="column_wra">
+      <h5 class="head">视图操作</h5>
+      <div class="body" v-for="item in arr10">
         <p>{{ item.keys }}</p>
         <p>{{ item.name }}</p>
       </div>
@@ -77,7 +85,7 @@ const arr1 = [
   { keys: 'W', name: '魔棒工具' },
   { keys: 'C', name: '裁剪工具' },
   { keys: 'K', name: '切片工具、切片选择工具' },
-  { keys: 'J', name: '喷枪工具' },
+  { keys: 'J', name: '修复画笔工具' },
   { keys: 'B', name: '画笔工具、铅笔工具' },
   { keys: 'S', name: '橡皮图章、图案图章' },
   { keys: 'Y', name: '历史画笔工具、艺术历史画笔' },
@@ -198,11 +206,6 @@ const arr6 = [
   { keys: 'Shift+BackSpace或Shift+F5', name: '弹出“填充”对话框' },
   { keys: 'Alt+Ctrl+Backspace', name: '从历史记录中填充' }
 ]
-// 视图操作
-const arr7 = [
-  { keys: 'Ctrl+I', name: '显示彩色通道' },
-  { keys: 'Ctrl+数字', name: '显示单色通道' }
-]
 // 图层操作
 const arr8 = [
   { keys: 'Ctrl+Shift+N', name: '从对话框新建一个图层' },
@@ -269,7 +272,9 @@ const arr9 = [
   { keys: 'M', name: '反射工具(液化)' },
   { keys: 'E', name: '重构工具(液化)' },
   { keys: 'F', name: '冻结工具(液化)' },
-  { keys: 'T', name: '解冻工具(液化)' }
+  { keys: 'T', name: '解冻工具(液化)' },
+  { keys: 'Ctrl+I', name: '显示彩色通道' },
+  { keys: 'Ctrl+数字', name: '显示单色通道' }
 ]
 // 视图操作
 const arr10 = [
