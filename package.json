@@ -9,11 +9,13 @@
   },
   "dependencies": {
     "current-device": "^0.10.2",
+    "isotope-layout": "^3.0.6",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vue-watching-you": "^0.0.8"
   },
   "devDependencies": {
+    "@types/isotope-layout": "^3.0.9",
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-plugin-typescript": "~5.0.0",
     "@vue/cli-service": "~5.0.0",

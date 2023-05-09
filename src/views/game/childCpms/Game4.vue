@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div ref="container" class="container">
     <!-- 1工具箱 -->
     <div class="column_wra">
       <h5 class="head">工具箱</h5>
@@ -59,7 +59,7 @@
     <!--8图像调整 -->
     <div class="column_wra">
       <h5 class="head">图像调整</h5>
-      <div class="body" v-for="item in arr8">
+      <div class="body" v-for="item in arr9">
         <p>{{ item.keys }}</p>
         <p>{{ item.name }}</p>
       </div>
@@ -77,6 +77,7 @@
 
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue'
+import Isotope from 'isotope-layout'
 // 工具箱
 const arr1 = [
   { keys: 'M', name: '矩形、椭圆选框工具' },
@@ -291,17 +292,63 @@ const arr10 = [
   { keys: 'Ctrl+PageUp', name: '向左卷动一屏' },
   { keys: 'Ctrl+PageDown', name: '向右卷动一屏' },
   { keys: 'Shift+PageUp', name: '向上卷动十个单位' },
-  { keys: 'Ctrl+/', name: '选择快速蒙版' }
+  { keys: 'Shift+PageDown', name: '向下卷动十个单位' },
+  { keys: 'Shift+Ctrl+PageUp', name: '向左卷动十个单位' },
+  { keys: 'Shift+Ctrl+PageDown', name: '向右卷动十个单位' },
+  { keys: 'Ctrl+/', name: '选择快速蒙版' },
+  { keys: 'HOME', name: '将视图移到左上角' },
+  { keys: 'End', name: '将视图移到右上角' },
+  { keys: 'Ctrl+H', name: '显示/隐藏选择区域' },
+  { keys: 'Ctrl+Shift+H', name: '显示/隐藏路径' },
+  { keys: 'Ctrl+R', name: '显示/隐藏标尺' },
+  { keys: 'Ctrl+;', name: '捕捉' },
+  { keys: 'Ctrl+Alt+;', name: '锁定参考线' },
+  { keys: 'F6', name: '显示/隐藏"颜色"面板' },
+  { keys: 'F7', name: '显示/隐藏"图层"面板' },
+  { keys: 'F8', name: '显示/隐藏"信息"面板' },
+  { keys: 'F9', name: '显示/隐藏"动作"面板' },
+  { keys: 'TAB', name: '显示/隐藏所有命令面板' },
+  { keys: 'Shift+TAB', name: '显示/隐藏工具箱以外的所有调板' },
+  { keys: 'Ctrl+T', name: '显示/隐藏"字符"面板' },
+  { keys: 'Ctrl+M', name: '显示/隐藏"段落"面板' },
+  { keys: 'Ctrl+Shift+L', name: '左对齐或顶对齐' },
+  { keys: 'Ctrl+Shift+C', name: '中对齐' },
+  { keys: 'Ctrl+Shift+R', name: '右对齐或低对齐' },
+  { keys: 'Shift+←/→', name: '左/右选择一个字符' },
+  { keys: 'Shift+↑/↓', name: '上/下选择一个字符' },
+  { keys: 'Ctrl+A', name: '选择所有字符' },
+  { keys: 'Ctrl+H', name: '显示/隐藏字体选取纹底' },
+  { keys: 'Shift+点按', name: '选择从插入点到鼠标点按点的字符' },
+  { keys: '←/→', name: '左/右移动一个字符' },
+  { keys: '↑/↓', name: '上/下选择一行' },
+  { keys: 'Ctrl+←/→', name: '左/右移动一个字' },
+  { keys: 'Ctrl+Shift+<', name: '将所选文本的文字大小减小2点像素' },
+  { keys: 'Ctrl+Shift+>', name: '将所选文本的文字大小增大2点像素' },
+  { keys: 'Ctrl+Alt+Shift+<', name: '将所选文本的文字大小减小10点像素' },
+  { keys: 'Ctrl+Alt+Shift+>', name: '将所选文本的文字大小增大10点像素' },
+  { keys: 'Alt+↓', name: '将行距减少2点像素' },
+  { keys: 'Alt+↑', name: '将行距增大2点像素' },
+  { keys: 'Shift+Alt+↓', name: '将基线位移减小2点像素' },
+  { keys: 'Shift+Alt+↑', name: '将基线位移增加2点像素' }
 ]
+
+const container = ref()
+const isotope = ref()
+onMounted(() => {
+  isotope.value = new Isotope(container.value, {
+    itemSelector: '.column_wra'
+    // layoutMode: 'fitRows'
+  })
+})
 </script>
 <style scoped lang="scss">
 .container {
-  display: flex;
+  // display: flex;
   padding-left: 100px;
-  width: calc(100% - 17px);
-  height: 100%;
-  overflow-x: hidden;
-  flex-wrap: wrap;
+  // width: calc(100% - 17px);
+  // height: 100%;
+  // overflow-x: hidden;
+  // flex-wrap: wrap;
 }
 .column_wra {
   margin: 0 50px 50px 0;
@@ -316,6 +363,7 @@ const arr10 = [
     font-size: 22px;
   }
   .body {
+    border-bottom: 1px solid #0b2845;
     display: flex;
     justify-content: center;
     p {
