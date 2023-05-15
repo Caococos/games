@@ -4,6 +4,7 @@
     <!-- another options...-->
     <div
       style="color: #fff; pointer-events: none"
+      class="watching_u"
       :className="watchingYouProps.className"
       :style="watchingYouProps.style"
     >
@@ -21,6 +22,10 @@ import WatchingYou from 'vue-watching-you'
 </script>
 
 <style lang="scss">
+.watching_u {
+  position: fixed;
+  left: 50%;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
